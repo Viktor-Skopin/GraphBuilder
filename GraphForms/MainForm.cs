@@ -12,7 +12,7 @@ namespace GraphForms
         public MainForm()
         {
             InitializeComponent();
-            MainTimer.Start();
+            numericUpDown1.Value = MainTimer.Interval;
         }
 
         private void MainTimer_Tick(object sender, EventArgs e)
@@ -42,6 +42,25 @@ namespace GraphForms
             //Вывод прогноза
             anemometer.GetForecastValue();
             AneForTB.Text = Convert.ToString(anemometer.Forecast);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (MainTimer.Enabled)
+            {
+                MainTimer.Stop();
+                button1.Text = "Старт";
+            }
+            else
+            {
+                MainTimer.Start();
+                button1.Text = "Стоп";
+            }
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            MainTimer.Interval = Convert.ToInt32(numericUpDown1.Value);
         }
     }
 }
